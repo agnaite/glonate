@@ -7,15 +7,27 @@
 <body>
   
   <div id="content">
-    <h1>glonate</h1>
   </div>
 
 <script src="https://fb.me/react-0.14.6.js"></script>
 <script src="https://fb.me/react-dom-0.14.6.js"></script>
 <script src="http://fb.me/JSXTransformer-0.12.1.js"></script>
 <script type="text/jsx">
-/*Add your React code here*/
 
+/*Add your React code here*/
+  var Title = React.createClass({
+    render: function() {
+      return (
+        <div className="title">
+          Glonate
+        </div>
+      );
+    }
+  });
+  ReactDOM.render(
+    <Title />,
+    document.getElementById('content')
+  );
 
 </script>
 </body>
