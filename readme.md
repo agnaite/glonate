@@ -1,4 +1,4 @@
-# glonate
+# glonate [![Build Status](https://travis-ci.org/agnaite/glonate.svg?branch=master)](https://travis-ci.org/agnaite/glonate)
 
 
 ## Setup
