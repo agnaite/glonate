@@ -7,6 +7,15 @@
   "directories": {
     "test": "tests"
   },
+  "scripts": {
+    "build-js": "browserify static/js/app.js > static/dist/app.js",
+    "build-css": "node-sass static/css/app.scss static/dist/app.css",
+    "build": "npm run lint && npm run build-js",
+    "lint": " static/js/*.js",
+    "watch-css": "nodemon -L -e scss --ignore node_modules/ --watch 'static/css/*.scss' -x \"npm run build-css\"",
+    "watch-js": "nodemon -L -e js  --ignore node_modules/ --ignore static/dist --watch 'static/js/*.js' -x \"npm run build-js\"",
+    "watch": "npm run watch-js & npm run watch-css"
+  },
   "jshintConfig": {
     "asi": false,
     "boss": true,
@@ -46,12 +55,11 @@
   },
   "homepage": "https://github.com/agnaite/glonate#readme",
   "devDependencies": {
+    "bootstrap": "^3.3.7",
     "browserify": "^13.1.0",
+    "jquery": "^3.1.1",
     "jshint": "^2.9.3",
     "node-sass": "~3.8.0",
-    "nodemon": "~1.10.2",
-    "react": "^15.3.2",
-    "react-bootstrap": "^0.30.3",
-    "react-dom": "^15.3.2"
+    "nodemon": "~1.10.2"
   }
 }

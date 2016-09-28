@@ -28,8 +28,8 @@ def index_page():
 
 if __name__ == "__main__":
 
-    user = User('test', 'test@example.com')
-    db.session.add(user)
-    db.session.commit()
-    db.create_all()
+    # user = User('test', 'test@example.com')
+    # db.session.add(user)
+    # db.session.commit()
+    # db.create_all()
     app.run(debug=True)
