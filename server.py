@@ -2,10 +2,19 @@
 
 from environment import *
 import os
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, g
 
 app = Flask(__name__)
 
+@app.before_request
+def before_request():
+    g.db = db_proxy
+    g.db.connect()
+
+@app.after_request
+def after_request(response):
+    g.db.close()
+    return response
 
 @app.route('/')
 def index_page():
