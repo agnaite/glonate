@@ -2,9 +2,14 @@
 
 from environment import *
 import os
-from flask import Flask, render_template, request, jsonify, session, g
+from flask import Flask, render_template, request, jsonify, session, g, current_app
 
 app = Flask(__name__)
+
+with app.app_context():
+    # within this block, current_app points to app.
+    print current_app.name
+
 
 @app.before_request
 def before_request():
