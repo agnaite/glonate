@@ -9,9 +9,11 @@ db.create_tables([User, Message])
 
 # some seeds go here
 
-user = User.create(email='test@example.com')
-print(user)
+user = User.create(email='user@example.com')
+messenger = User.create(email='messenger@example.com')
 
-message = Message.create(user=user, body='human gives money. human receives money. human glonates')
+Message.create(user=user, body='human needs money')
+Message.create(user=messenger, body='human gives money')
+Message.create(user=user, body='human says ty')
 
 print(message)
