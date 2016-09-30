@@ -9,8 +9,10 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-# creates my_database.db with seed data
-# you might need to rm my_database.db if it already exists
+# create postgres database
+createdb glonate_development
+
+# migrate & seed database
 python setupdb.py
 
 # start the app

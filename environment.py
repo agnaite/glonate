@@ -1,8 +1,11 @@
+import os
 import datetime
 from peewee import *
 from playhouse.sqlite_ext import SqliteExtDatabase
 
-db = SqliteExtDatabase('my_database.db')
+DATABASE_URL = os.getenv('DATABASE_URL') or 'glonate_development'
+
+db = PostgresqlDatabase(DATABASE_URL)
 
 class BaseModel(Model):
     ''' basic peewee setup '''
