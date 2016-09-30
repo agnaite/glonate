@@ -4,6 +4,7 @@
 {% block content %}
   <h1>Messages</h1>
   {% for msg in messages %}
-    <h3>{{ msg.body }}</h3>
+  <h3>{{ msg.body }}</h3>
+  {{ msg.user.email }}
   {% endfor %}
 {% endblock %}
