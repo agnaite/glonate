@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 def index_page():
     user = User.select().where(User.email == 'test@example.com').first()
-    messages = Message.select().where(Message.user == user)
+    messages = Message.select()
 
     return render_template("index.html",
                            messages=messages,
