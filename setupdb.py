@@ -1,7 +1,7 @@
 # run database migrations and what-not
 
 from environment import *
-from Flask import g
+from flask import g
 
 g.db = db_proxy
 g.db.connect()
