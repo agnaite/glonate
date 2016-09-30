@@ -4,6 +4,9 @@ from peewee import *
 import urlparse
 from playhouse.sqlite_ext import SqliteExtDatabase
 
+
+db_proxy = Proxy()
+
 if 'HEROKU' in os.environ:
     urlparse.uses_netloc.append('postgres')
     url = urlparse.urlparse(os.environ['DATABASE_URL'])
@@ -19,6 +22,17 @@ else:
     DATABASE = 'glonate_development'
 
 db = PostgresqlDatabase(DATABASE)
+db_proxy.initialize(db)
+
+@app.before_request
+def before_request():
+    g.db = db_proxy
+    g.db.connect()
+
+@app.after_request
+def after_request(response):
+    g.db.close()
+    return response
 
 class BaseModel(Model):
     ''' basic peewee setup '''
