@@ -19,7 +19,7 @@ def index_page():
 if __name__ == "__main__":
     db.connect()
 
-    DEBUG = "NO_DEBUG" not in os.environ
+    DEBUG = "DEBUG" in os.environ
     PORT = int(os.environ.get("PORT", 5000))
 
     app.run(port=PORT, debug=DEBUG)
