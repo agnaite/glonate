@@ -15,5 +15,3 @@ messenger = User.create(email='messenger@example.com')
 Message.create(user=user, body='human needs money')
 Message.create(user=messenger, body='human gives money')
 Message.create(user=user, body='human says ty')
-
-print(message)
