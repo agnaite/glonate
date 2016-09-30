@@ -30,11 +30,16 @@ class Message(BaseModel):
 @app.route('/')
 def index_page():
     user = User.select().where(User.email << 'test@example.com')
-    return render_template("index.html")
+    messages = [ Message.select().where(Message.user << user) ]
+    print(messages)
 
+    return render_template("index.html",
+                           messages=messages,
+                           usage=user)
 
 if __name__ == "__main__":
     db.connect()
     db.create_tables([User, Message])
-    User.create(email='test@example.com')
+    user = User.create(email='test@example.com')
+    message = Message.create(user=user, body='human gives money. human receives money. human glonates')
     app.run()
