@@ -1,0 +1,9 @@
+.navbar {
+  background-color: white;
+  border: none;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color: gold;
+}
