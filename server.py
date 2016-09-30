@@ -24,7 +24,10 @@ class User(db.Model):
 def index_page():
     """Show index page."""
 
-    return render_template("index.html")
+    messages = ['human gives money', 'human receives money', 'human glonates']
+
+    return render_template("index.html",
+                           messages=messages)
 
 if __name__ == "__main__":
 
