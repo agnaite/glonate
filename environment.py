@@ -1,11 +1,24 @@
 import os
 import datetime
 from peewee import *
+import urlparse
 from playhouse.sqlite_ext import SqliteExtDatabase
 
-DATABASE_URL = os.getenv('DATABASE_URL') or 'glonate_development'
+if 'HEROKU' in os.environ:
+    urlparse.uses_netloc.append('postgres')
+    url = urlparse.urlparse(os.environ['DATABASE_URL'])
+    DATABASE = {
+        'engine': 'peewee.PostgresqlDatabase',
+        'name': url.path[1:],
+        'user': url.username,
+        'password': url.password,
+        'host': url.hostname,
+        'port': url.port,
+    }
+else:
+    DATABASE = 'glonate_development'
 
-db = PostgresqlDatabase(DATABASE_URL)
+db = PostgresqlDatabase(DATABASE)
 
 class BaseModel(Model):
     ''' basic peewee setup '''
