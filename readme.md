@@ -10,10 +10,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # create postgres database
-createdb glonate_development
+createdb glonate
 
 # migrate & seed database
-python setupdb.py
+python model.py
 
 # start the app
 python server.py
