@@ -1,39 +1,27 @@
 #!/usr/bin/env python
 
-from environment import *
 import os
-from flask import Flask, render_template, request, jsonify, session, g
+from flask import Flask, render_template, request, jsonify, session
+from model import connect_to_db, db, User, Message
+
 
 app = Flask(__name__)
 
-with app.app_context():
-    # within this block, current_app points to app.
-    print g.name
-
-
-@app.before_request
-def before_request():
-    g.db = db_proxy
-    g.db.connect()
-
-@app.after_request
-def after_request(response):
-    g.db.close()
-    return response
 
 @app.route('/')
 def index_page():
-    user = User.select().where(User.email == 'test@example.com').first()
-    messages = Message.select()
+    user = User.query.get(1)
+    messages = Message.query.all()
 
     return render_template("index.html",
                            messages=messages,
                            user=user)
 
 if __name__ == "__main__":
-    db.connect()
+
+    connect_to_db(app, os.environ.get("DATABASE_URL"))
 
     DEBUG = "NO_DEBUG" not in os.environ
     PORT = int(os.environ.get("PORT", 5000))
 
-    app.run(port=PORT, debug=DEBUG)
+    app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
