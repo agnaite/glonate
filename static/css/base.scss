@@ -7,6 +7,14 @@
   border: none;
 }
 
+.navbar-brand {
+  font-family: 'Space Mono', monospace;
+}
+
+.navbar li a {
+  font-family: 'Space Mono', monospace;
+}
+
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover {
   background-color: gold;
