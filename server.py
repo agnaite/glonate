@@ -10,12 +10,28 @@ app = Flask(__name__)
 
 @app.route('/')
 def index_page():
+    """Home page."""
+
     user = User.query.get(1)
     messages = Message.query.all()
 
     return render_template("index.html",
                            messages=messages,
                            user=user)
+
+
+@app.route('/register')
+def register_user():
+    """Registration page."""
+
+    return render_template("register.html")
+
+
+@app.route('/register-submit')
+def submit_registration():
+    """Submit registration page."""
+
+    
 
 if __name__ == "__main__":
 
