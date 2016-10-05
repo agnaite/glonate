@@ -27,11 +27,23 @@ def register_user():
     return render_template("register.html")
 
 
-@app.route('/register-submit')
+@app.route('/process_registration', methods=['POST'])
 def submit_registration():
     """Submit registration page."""
 
-    
+    email = request.form['email']
+    password = hash(request.form['password'])
+    location = request.form['location']
+    role = request.form['role']
+
+
+    print email
+
+    return render_template("register.html",
+                           email=email,
+                           password=password,
+                           location=location,
+                           role=role)
 
 if __name__ == "__main__":
 
