@@ -8,6 +8,12 @@
   <link rel="stylesheet" href='/static/dist/app.css'>
 </head>
 <body>
+
+  {% set navigation_bar_right = [
+    ('/register', 'register', 'Register'),
+    ('/login', 'login', 'Login')
+  ] -%}
+  {% set active_page = active_page|default('index') -%}
   
   <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -27,9 +33,12 @@
             <li><a href="#contact">Contact</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <!-- <li class="active"><a href="./">Home <span class="sr-only">(current)</span></a></li> -->
-            <li><a href="">Login</a></li>
-            <li><a href="/register">Register</a></li>
+            {% for href, id, caption in navigation_bar_right %}
+              <li{% if id == active_page %} class="active"{% endif
+              %}><a href="{{ href|e }}">{{ caption|e }}</a></li>
+            {% endfor %}
+            <!-- <li><a href="">Login</a></li>
+            <li><a href="/register">Register</a></li> -->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
