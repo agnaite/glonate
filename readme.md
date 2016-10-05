@@ -5,7 +5,7 @@
 
 ```bash
 virtualenv env
-source venv/bin/activate
+source env/bin/activate
 
 pip install -r requirements.txt
 
