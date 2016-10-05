@@ -31,13 +31,10 @@ def register_user():
 def submit_registration():
     """Submit registration page."""
 
-    email = request.form['email']
-    password = hash(request.form['password'])
-    location = request.form['location']
-    role = request.form['role']
-
-
-    print email
+    email = request.form.get('email')
+    password = hash(request.form.get('password'))
+    location = request.form.get('location')
+    role = request.form.getlist('role')
 
     return render_template("register.html",
                            email=email,

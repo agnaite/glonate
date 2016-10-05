@@ -6445,3 +6445,15 @@ button.close {
 
 form {
   padding-top: 40px; }
+
+.role-checkbox__input:enabled + .role-checkbox__btn {
+  cursor: pointer;
+  opacity: .75; }
+
+.role-checkbox__input:focus + .role-checkbox__btn {
+  opacity: .75; }
+
+.role-checkbox__input:checked + .role-checkbox__btn {
+  opacity: 1;
+  background-color: gold;
+  border-color: gold; }
