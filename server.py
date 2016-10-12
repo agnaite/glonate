@@ -3,6 +3,7 @@
 import os
 from flask import Flask, render_template, request, jsonify, session
 from model import connect_to_db, db, User, Message
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -35,8 +36,14 @@ def submit_registration():
     password = hash(request.form.get('password'))
     location = request.form.get('location')
     role = request.form.getlist('role')
+    confirmed_at = datetime.now()
 
-    return render_template("register.html",
+    user = User(email=email, password=password, location=location, role=role, confirmed_at=confirmed_at)
+
+    db.session.add(user)
+    db.session.commit()
+
+    return render_template("user.html",
                            email=email,
                            password=password,
                            location=location,

@@ -17,7 +17,6 @@ class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     # User authentication information
-    username = db.Column(db.String(64), nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
 
     # User email information
@@ -45,15 +44,13 @@ class Message(db.Model):
 def example_data():
     """Create some sample data."""
 
-    user = User(username="jane_doe",
-                password="abc",
+    user = User(password="abc",
                 email="jane@example.com",
                 confirmed_at=datetime.datetime.now(),
                 role="donor",
                 location="Germany")
 
-    messenger = User(username="tom_jones",
-                     password="abc",
+    messenger = User(password="abc",
                      email="tom@example.com",
                      confirmed_at=datetime.datetime.now(),
                      role="messenger",
