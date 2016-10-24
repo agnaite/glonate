@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from flask import Flask, render_template, request, jsonify, session, redirect
+from flask import Flask, render_template, request, jsonify, session, redirect, flash
 from model import connect_to_db, db, User, Message
 from datetime import datetime
 
@@ -56,6 +56,37 @@ def submit_registration():
                            password=password,
                            location=location,
                            role=role)
+
+
+@app.route('/login')
+def login():
+
+    return render_template("login.html")
+
+
+@app.route('/process_login', methods=['POST'])
+def process_login():
+
+    email = request.form.get('email')
+    password = hash(request.form.get('password'))
+
+    try:
+        user = User.query.filter_by(email=email).one()
+
+        if int(user.password) == password:
+            session['logged_in'] = user.user_id
+
+            return render_template("user.html",
+                                   email=user.email,
+                                   password=user.password,
+                                   location=user.location,
+                                   role=user.role)
+        else:
+            flash('Incorrect password.')
+            return render_template("login.html")
+    except:
+        flash('Email not found.')
+        return render_template("login.html")
 
 
 @app.route('/logout')
