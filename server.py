@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, redirect
 from model import connect_to_db, db, User, Message
 from datetime import datetime
 
@@ -56,6 +56,15 @@ def submit_registration():
                            password=password,
                            location=location,
                            role=role)
+
+
+@app.route('/logout')
+def logout():
+
+    del session['logged_in']
+
+    return render_template("index.html")
+
 
 if __name__ == "__main__":
 
