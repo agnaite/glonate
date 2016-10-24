@@ -6457,3 +6457,8 @@ form {
   opacity: 1;
   background-color: gold;
   border-color: gold; }
+
+.home__jumbotron {
+  margin-top: 120px;
+  font-size: 18px;
+  text-align: justify; }

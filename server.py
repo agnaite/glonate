@@ -92,7 +92,8 @@ def process_login():
 @app.route('/logout')
 def logout():
 
-    del session['logged_in']
+    if "logged_in" in session:
+        del session['logged_in']
 
     return render_template("index.html")
 
