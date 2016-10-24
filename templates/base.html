@@ -9,10 +9,14 @@
 </head>
 <body>
 
-  {% set navigation_bar_right = [
+  {% set navigation_bar_right_logged_out = [
     ('/register', 'register', 'Register'),
-    ('/user', 'user', 'User')
     ('/login', 'login', 'Login')
+  ] -%}
+
+  {% set navigation_bar_right_logged_in = [
+    ('/user', 'user', 'Profile'),
+    ('/logout', 'logout', 'Logout')
   ] -%}
 
   {% set navigation_bar_left = [
@@ -42,12 +46,17 @@
             {% endfor %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            {% for href, id, caption in navigation_bar_right %}
-              <li{% if id == active_page %} class="active"{% endif
-              %}><a href="{{ href|e }}">{{ caption|e }}</a></li>
-            {% endfor %}
-            <!-- <li><a href="">Login</a></li>
-            <li><a href="/register">Register</a></li> -->
+            {% if session['logged_in'] %}
+              {% for href, id, caption in navigation_bar_right_logged_in %}
+                <li{% if id == active_page %} class="active"{% endif
+                %}><a href="{{ href|e }}">{{ caption|e }}</a></li>
+              {% endfor %}
+            {% else %}
+              {% for href, id, caption in navigation_bar_right_logged_out %}
+                <li{% if id == active_page %} class="active"{% endif
+                %}><a href="{{ href|e }}">{{ caption|e }}</a></li>
+              {% endfor %}
+            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>

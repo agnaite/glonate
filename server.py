@@ -8,6 +8,8 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+app.secret_key = 'abc' # os.environ.get("FLASK_SECRET_KEY")
+
 
 @app.route('/')
 def index_page():
@@ -38,10 +40,16 @@ def submit_registration():
     role = request.form.getlist('role')
     confirmed_at = datetime.now()
 
-    user = User(email=email, password=password, location=location, role=role, confirmed_at=confirmed_at)
+    user = User(email=email,
+                password=password,
+                location=location,
+                role=role,
+                confirmed_at=confirmed_at)
 
     db.session.add(user)
     db.session.commit()
+
+    session['logged_in'] = User.query.filter_by(email=email).one().user_id
 
     return render_template("user.html",
                            email=email,
